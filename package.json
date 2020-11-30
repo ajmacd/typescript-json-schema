@@ -1,6 +1,9 @@
 {
-  "name": "typescript-json-schema",
-  "version": "0.44.0",
+  "name": "@ajm/typescript-json-schema",
+  "version": "0.44.0-ajm1",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "typescript-json-schema generates JSON Schema files from your Typescript sources",
   "main": "dist/typescript-json-schema.js",
   "typings": "dist/typescript-json-schema.d.ts",
