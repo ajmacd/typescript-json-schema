@@ -25,6 +25,7 @@ export function getDefaultArgs(): Args {
         propOrder: false,
         typeOfKeyword: false,
         required: false,
+        description: true,
         strictNullChecks: false,
         ignoreErrors: false,
         out: "",
@@ -52,6 +53,7 @@ export type Args = {
     propOrder: boolean;
     typeOfKeyword: boolean;
     required: boolean;
+    description: boolean;
     strictNullChecks: boolean;
     ignoreErrors: boolean;
     out: string;
@@ -446,15 +448,17 @@ export class JsonSchemaGenerator {
             return;
         }
 
-        // the comments for a symbol
-        const comments = symbol.getDocumentationComment(this.tc);
+        if (this.args.description) {
+            // the comments for a symbol
+            const comments = symbol.getDocumentationComment(this.tc);
 
-        if (comments.length) {
-            definition.description = comments
-                .map((comment) =>
-                    comment.kind === "lineBreak" ? comment.text : comment.text.trim().replace(/\r\n/g, "\n")
-                )
-                .join("");
+            if (comments.length) {
+                definition.description = comments
+                    .map((comment) =>
+                        comment.kind === "lineBreak" ? comment.text : comment.text.trim().replace(/\r\n/g, "\n")
+                    )
+                    .join("");
+            }
         }
 
         // jsdocs are separate from comments
